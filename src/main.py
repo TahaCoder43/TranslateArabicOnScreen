@@ -35,7 +35,7 @@ def screenshot():
         image = ImageGrab.grab(bbox=bbox)
         with open(SCREENSHOT_PATH, "rw") as file:
             image.save(file)
-    except ValueError:
+    except ValueError or OSError:
         subprocess.run(["grim", "-g", dimensions, SCREENSHOT_PATH,])
 
 
