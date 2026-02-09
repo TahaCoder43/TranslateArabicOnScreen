@@ -27,6 +27,7 @@
           src = "./";
           pyproject = false;
           dependencies = devShells.default.buildInputs or [ ] ++ devShells.default.packages or [ ];
+          dontUnpack = true;
         };
       }
     );
