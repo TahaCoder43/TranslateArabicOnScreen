@@ -25,15 +25,15 @@
           pname = "translate-arabic-on-screen";
           version = "1.0";
           src = ./.;
-          format = "other";
+          pyproject = true;
           propagatedBuildInputs = devShells.default.buildInputs or [ ] ++ devShells.default.packages or [ ];
 
-          postInstall = ''
-            mkdir -p $out/bin
-            # This copies your main script and makes it the 'executable'
-            cp main.py $out/bin/translate-arabic-on-screen
-            chmod +x $out/bin/translate-arabic-on-screen
-          '';
+          # postInstall = ''
+          #   mkdir -p $out/bin
+          #   # This copies your main script and makes it the 'executable'
+          #   cp main.py $out/bin/translate-arabic-on-screen
+          #   chmod +x $out/bin/translate-arabic-on-screen
+          # '';
           # dontUnpack = true;
         };
       }
