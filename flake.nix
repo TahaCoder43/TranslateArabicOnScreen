@@ -24,7 +24,7 @@
         packages.default = pkgs.python313Packages.buildPythonApplication {
           pname = "translate-arabic-on-screen";
           version = "1.0";
-          src = "./";
+          src = ./.;
           format = "other";
           propagatedBuildInputs = devShells.default.buildInputs or [ ] ++ devShells.default.packages or [ ];
 
