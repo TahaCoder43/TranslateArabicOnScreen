@@ -1,0 +1,7 @@
+[project]
+name = "translate-arabic-on-screen"
+version = "1.0"
+dependencies = [] # Nix handles the depenedencies
+
+[project.scripts]
+translate-arabic = "main:main"
