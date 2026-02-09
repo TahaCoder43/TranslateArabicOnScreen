@@ -26,7 +26,12 @@
           version = "1.0";
           src = ./.;
           pyproject = true;
+
           propagatedBuildInputs = devShells.default.buildInputs or [ ] ++ devShells.default.packages or [ ];
+          nativeBuildInputs = [
+            pkgs.python313Packages.setuptools
+            pkgs.python313Packages.wheel
+          ];
 
           # postInstall = ''
           #   mkdir -p $out/bin
