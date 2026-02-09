@@ -3,12 +3,11 @@ import subprocess
 import sys
 from PIL import ImageGrab
 import re
-import easyocr
 import webbrowser
+from modules import model
 
 SCREENSHOT_PATH = "/tmp/arabic_to_translate.png"
-reader = easyocr.Reader(["ar"])
-
+arabic_ocr = model.ArabicOCR()
 
 def screenshot():
     result = subprocess.run(["slurp"], capture_output=True, text=True)
@@ -41,17 +40,16 @@ def screenshot():
 
 
 def extract_arabic_text() -> str:
-    extracted_arabic = reader.readtext(SCREENSHOT_PATH)
-    filtered_arabic = filter(lambda text: text[-1] > 0.5, extracted_arabic)
-    texts: list[str] = list(map(lambda text: text[-2], filtered_arabic))
-    all_text = reduce(lambda text, part: f"{text} {part}", texts)
+    all_text = arabic_ocr.predict(SCREENSHOT_PATH)
+    all_text = re.sub(r"\u064B-\u065F\u0670", "", all_text)
+    # filtered_arabic = filter(lambda text: text[-1] > 0.5, extracted_arabic)
+    # texts: list[str] = list(map(lambda text: text[-2], filtered_arabic))
+    # all_text = reduce(lambda text, part: f"{text} {part}", texts)
 
     with open("/tmp/arabic_output", "w") as file:
         file.write(all_text)
 
     return all_text
-
-
 
 def main():
     screenshot()

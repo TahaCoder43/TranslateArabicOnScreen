@@ -19,8 +19,15 @@
           config.allowUnfree = true;
         };
       in
-      {
+      rec {
         devShells.default = import ./shell.nix { inherit pkgs; };
+        packages.default = pkgs.python313Packages.buildPythonApplication {
+          pname = "translate-arabic-on-screen";
+          version = "1.0";
+          src = "./";
+          pyproject = false;
+          dependencies = devShells.default.buildInputs or [ ] ++ devShells.default.packages or [ ];
+        };
       }
     );
 }
