@@ -27,7 +27,8 @@
           src = ./.;
           pyproject = true;
 
-          propagatedBuildInputs = devShells.default.buildInputs or [ ] ++ devShells.default.packages or [ ];
+          propagatedBuildInputs =
+            devShells.default.buildInputs or [ ] ++ devShells.default.nativeBuildInputs or [ ];
           nativeBuildInputs = [
             pkgs.python313Packages.setuptools
             pkgs.python313Packages.wheel
